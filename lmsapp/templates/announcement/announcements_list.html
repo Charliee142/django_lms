@@ -1,0 +1,6 @@
+<h1>Announcements for {{ course.title }}</h1>
+<ul>
+    {% for announcement in announcements %}
+        <li><strong>{{ announcement.title }}:</strong> {{ announcement.content }} ({{ announcement.created_at }})</li>
+    {% endfor %}
+</ul>

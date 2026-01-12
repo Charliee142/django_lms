@@ -1,0 +1,25 @@
+<h1>{{ user.username }}'s Progress Report</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Course</th>
+            <th>Completed Lessons</th>
+            <th>Total Lessons</th>
+            <th>Progress</th>
+            <th>Quiz Scores</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for report in progress_reports %}
+        <tr>
+            <td>{{ report.course.title }}</td>
+            <td>{{ report.completed_lessons }}</td>
+            <td>{{ report.total_lessons }}</td>
+            <td>{{ report.progress_percentage }}%</td>
+            <td>{{ report.quiz_scores }}</td>
+            <td>{{ "Completed" if report.completed else "In Progress" }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

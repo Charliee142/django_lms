@@ -1,0 +1,12 @@
+<h2>{{ thread.title }}</h2>
+<ul>
+    {% for post in posts %}
+        <li><strong>{{ post.author.username }}:</strong> {{ post.content }} ({{ post.created_at }})</li>
+    {% endfor %}
+</ul>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Post Reply</button>
+</form>

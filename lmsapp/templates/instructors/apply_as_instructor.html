@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact Us{% endblock title %}
+{% block content %}
+ <!-- COUNTUP
+    ================================================== -->
+    <div class="py-5 py-md-12 jarallax overlay overlay-primary overlay-70" data-jarallax data-speed=".8" style="background-image: url(assets/img/covers/cover-24.jpg)">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-12">
+                    <div class="text-center">
+                        <p class="text-orange text-capitalize font-size-lg mb-3">Create free account to become an Instructor today</p>
+                        <h3 class="text-uppercase text-white mb-6">Fill in the form below to apply as an instructor.</h3>
+                    </div>
+
+                    <div class="bg-white p-5 p-lg-7 rounded-lg">
+                        <form class="mb-2" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group mb-6">
+                                <input type="text" class="form-control form-control-sm placeholder-1" name="full_name" id="full_name" placeholder="Your Full Name">
+                                <label class="sr-only" for="cardName">Name</label>
+                            </div>
+                            <div class="form-group mb-6">
+                                <input type="email" class="form-control form-control-sm placeholder-1" name="email"  id="email" placeholder="Email">
+                                <label class="sr-only" for="cardEmail">Email</label>
+                            </div>
+                            <div class="form-group mb-6">
+                                <input type="number" class="form-control form-control-sm placeholder-1" name="phone"  id="phone" placeholder="Phone">
+                                <label class="sr-only" for="cardPhone">Phone</label>
+                            </div>
+                            <div class="form-group mb-6">
+                                <input type="text" class="form-control form-control-sm placeholder-1" name="job_title"  id="job_title" placeholder="Job Title">
+                                <label class="sr-only" for="cardPhone">Job title</label>
+                            </div>
+                            <div class="form-group mb-6">
+                                <input type="text" class="form-control form-control-sm placeholder-1" name="bio"  id="bio" placeholder="Bio">
+                                <label class="sr-only" for="cardPhone">Bio</label>
+                            </div>
+                            <div class="form-group mb-6">
+                                <input type="text" class="form-control form-control-sm placeholder-1" name="experience"  id="experience" placeholder="Experience">
+                                <label class="sr-only" for="cardPhone">Experience</label>
+                            </div>
+                            <div class="mt-6">
+                                <button class="btn btn-block btn-blue lift" type="submit">
+                                    APPLY NOW
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock content %}

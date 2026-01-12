@@ -1,0 +1,48 @@
+{% extends '../base.html' %}
+{% load static %}
+
+{% block title %}Welcome{% endblock title %}
+{% block content %}
+
+<div class="container py-3">
+    <div class="card">
+    <header class="card-header">
+        <h4 class="text-center">Profile Update</h4>
+    </header>
+   
+    <article class="card-body">
+    <form method="POST" action="">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="col form-group">
+                <label>First name</label>
+                  <input type="text" class="form-control" placeholder="" name="first_name" value="{{user.first_name}}">
+            </div> <!-- form-group end.// -->
+            <div class="col form-group">
+                <label>Last name</label>
+                  <input type="text" class="form-control" placeholder="" name="last_name" value="{{user.last_name}}">
+            </div> <!-- form-group end.// -->
+        </div>
+         <div class="form-row">
+            <div class="col form-group">
+                <label>Email address</label>
+                  <input type="email" class="form-control" placeholder="" name="email" value="{{user.email}}" readonly>
+            </div> <!-- form-group end.// -->
+            <div class="col form-group">
+                <label>Username</label>
+                  <input type="text" class="form-control" placeholder="" name="username" value="{{user.username}}" readonly>
+            </div> <!-- form-group end.// -->
+        </div>
+         <!-- form-row end.// -->
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" class="form-control" placeholder="Fill Only if You Want To Change Password" name="password">
+        </div> <!-- form-group end.// -->
+            <button type="submit" class="btn btn-primary mt-2">Update Profile</button>
+    </form>
+    </article> <!-- card-body end .// -->
+    </div> <!-- card.// -->
+    
+    </div>
+
+{% endblock content %}

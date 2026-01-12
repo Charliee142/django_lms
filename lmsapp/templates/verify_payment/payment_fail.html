@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Payment Fail{% endblock title %}
+{% block content %}
+{% load course_tags %}
+
+    <h1>Order Failed</h1>
+    <p>Sorry, your payment was not successful. Please try again.</p>
+    <a href="{% url 'checkout' %}" class="btn btn-primary">Try Again</a>
+
+
+{% endblock content %}

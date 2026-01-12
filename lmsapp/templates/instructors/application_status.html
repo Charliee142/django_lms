@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Your Instructor Application Status</h1>
+
+    <!-- Check if the application exists and display status -->
+    {% if application %}
+        <p>Your current application status: <strong>{{ application.status }}</strong></p>
+        <p>Applied on: {{ application.applied_on }}</p>
+    {% else %}
+        <p>No application found. Please <a href="{% url 'apply_as_instructor' %}">apply here</a>.</p>
+    {% endif %}
+
+</div>
+{% endblock %}

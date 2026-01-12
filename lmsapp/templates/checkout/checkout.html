@@ -1,0 +1,125 @@
+{% extends '../base.html' %}
+{% load static %}
+
+{% block title %}Checkout{% endblock title %}
+{% block content %}
+{% load course_tags %}
+{% load crispy_forms_tags %}
+
+<!-- SHOP CHECKOUT -->
+<div class="container">
+    <main>
+      <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4 rounded-pill" src="{% static 'assets/img/logo.jpeg' %}" alt="" width="72" height="57">
+        <h2>Checkout form</h2>
+        <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
+      </div>
+  
+      <div class="row g-5">
+        <div class="col-md-5 col-lg-4 order-md-last">
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-primary">Your cart</span>
+            <span class="badge bg-primary rounded-pill"></span>
+          </h4>
+          <ul class="list-group mb-3">
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+              <div>
+                <h6 class="my-0">{{course.title}}</h6>
+              </div>
+              <span>${{course.price}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+              <div>
+                <h6 class="my-0">Discount</h6>
+              </div>
+              <span>-${{course.discount}}%</span>
+            </li>
+          
+            <li class="list-group-item d-flex justify-content-between">
+              <span>Total (USD)</span>
+              <strong>${% discount_calculation course.price course.discount %}</strong>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-7 col-lg-8">
+          <h4 class="mb-3">Billing address</h4>
+          <form class="needs-validation" name="checkout" method="POST" action="?action=create_payment" novalidate="">
+            {% csrf_token %}
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <label for="firstName" class="form-label">First name</label>
+                <input type="text" class="form-control" id="first_name" name="first_name" placeholder="" value="" required>
+                <div class="invalid-feedback">
+                  Valid first name is required.
+                </div>
+              </div>
+  
+              <div class="col-sm-6">
+                <label for="lastName" class="form-label">Last name</label>
+                <input type="text" class="form-control" id="last_name" name="last_name" placeholder="" value="" required>
+                <div class="invalid-feedback">
+                  Valid last name is required.
+                </div>
+              </div>
+              <div class="col-12">
+                <label for="phone" class="form-label">Phone</label>
+                <input type="text" class="form-control" id="phone" name="phone" placeholder="090939393939" required>
+                <div class="invalid-feedback">
+                  Please enter a valid phone.
+                </div>
+              </div>
+            </div>
+  
+            <hr class="my-4">
+  
+            <h4 class="mb-3">Payment</h4>
+  
+            <div class="my-3">
+              <div class="form-check">
+                <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required>
+                <label class="form-check-label" for="credit">Credit card</label>
+              </div>
+              <div class="form-check">
+                <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required>
+                <label class="form-check-label" for="debit">Debit card</label>
+              </div>
+              <div class="form-check">
+                <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required>
+                <label class="form-check-label" for="paypal">PayPal</label>
+              </div>
+            </div>
+            <hr class="my-4">
+  
+            <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+  
+
+{% if order is not None %}
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+var options = {
+    "key": "rzp_test_1AcMMVMSYJKKXP",
+    "name": "Infinitehackers Online Course",
+    "description": "Payment for {{ course.title }}",
+    "image": "{% static 'assets/img/logo.jpeg' %}",
+    "order_id": "{{ order.id }}",
+    "callback_url": "http://127.0.0.1:8000/verify_payment",
+    "prefill": {
+        "name": "{{ order.notes.name }}",
+        "email": "{{ order.notes.email }}",
+        "contact": "{{ order.notes.phone }}"
+    },
+    "theme": {
+        "color": "#6f42c1"
+    }
+};
+var rzp1 = new Razorpay(options);
+rzp1.open();
+</script>
+{% endif %}
+
+{% endblock content %}

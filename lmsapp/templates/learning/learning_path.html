@@ -1,0 +1,9 @@
+<h1>{{ learning_path.name }}</h1>
+<p>{{ learning_path.description }}</p>
+
+<h2>Courses in this path</h2>
+<ul>
+    {% for course in courses %}
+        <li>{{ course.title }}</li>
+    {% endfor %}
+</ul>

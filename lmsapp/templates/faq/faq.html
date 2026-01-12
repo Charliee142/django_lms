@@ -1,0 +1,8 @@
+<!-- faq.html -->
+<h1>Frequently Asked Questions</h1>
+{% for faq in faqs %}
+    <div>
+        <h3>{{ faq.question }}</h3>
+        <p>{{ faq.answer }}</p>
+    </div>
+{% endfor %}
